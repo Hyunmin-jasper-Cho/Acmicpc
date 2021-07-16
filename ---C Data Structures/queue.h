@@ -9,6 +9,7 @@ typedef struct node Node;
 typedef struct queue Queue;
 struct queue {
     Node *sta;
+    int size;
 };
 struct node {
     d_type data;
@@ -23,7 +24,7 @@ Queue *new_queue() {
 }
 
 bool is_queue_empty(Queue *q) {
-    if (q->sta == NULL) return true;
+    if (q->size == 0) return true;
     else return false;
 }
 
@@ -47,6 +48,7 @@ void push(Queue *q, d_type data) {
         sta->next = new_node;
         new_node->prev = sta;
     }
+    q->size += 1;
 }
 
 Node *pop(Queue *q) {
@@ -58,12 +60,16 @@ Node *pop(Queue *q) {
         if (q->sta->next == NULL) { // delete root...
             q->sta = NULL;
         } else {
-            while (ret->next != NULL) {
-                ret = ret->next;
-            } ret->prev->next = NULL;
+            q->sta = q->sta->next;
         }
+
+        q->size -= 1;
         return ret;
     }
+}
+
+int get_size(Queue *q) {
+    return q->size;
 }
 
 d_type pop_value(Queue *q) {
