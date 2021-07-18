@@ -1,3 +1,7 @@
+//
+// Created by 조현민 on 7/16/21.
+//
+
 #ifndef SOLVING_QUEUE_H
 #define SOLVING_QUEUE_H
 
@@ -26,6 +30,21 @@ Queue *new_queue() {
 bool is_queue_empty(Queue *q) {
     if (q->size == 0) return true;
     else return false;
+}
+
+bool contains(Queue *q, d_type target) {
+    if (is_queue_empty(q)) return false;
+
+    Node *tmp = q->sta;
+    if (tmp->data == target) {
+        return true;
+    }
+    while (tmp->next != NULL) {
+        if (tmp->data == target) {
+            return true;
+        } else tmp = tmp->next;
+    }
+    return false;
 }
 
 void push(Queue *q, d_type data) {
@@ -78,5 +97,7 @@ d_type pop_value(Queue *q) {
     Node *tmp = pop(q);
     return tmp->data;
 }
+
+
 
 #endif //SOLVING_QUEUE_H
