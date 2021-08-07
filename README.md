@@ -1,2 +1,2 @@
 # Acmipc
-백준문제풀이
+https://solved.ac/profile/seeda
